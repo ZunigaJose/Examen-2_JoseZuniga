@@ -1,8 +1,9 @@
 package examen.pkg2_josezuniga_31841432;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Videos {
+public class Videos implements Serializable {
     private String nombre;
     private ArrayList<String> subtitulos = new ArrayList<>();
     private int likes, dislikes, tiempo;

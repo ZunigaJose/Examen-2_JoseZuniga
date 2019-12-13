@@ -1,19 +1,22 @@
 package examen.pkg2_josezuniga_31841432;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Usuarios {
-    private String nombre, correo, usuario, canal, contraseña;
-    private ArrayList<Canales> canales = new ArrayList<>();
-    private Playlist favoritos;
+public class Usuarios implements Serializable {
+    private String nombre, correo, usuario, contraseña;
+    private Canales canal;
+    private int edad;
+    private ArrayList<Canales> canalesSub = new ArrayList<>();
+    private Playlist favoritos = new Playlist();
 
-    public Usuarios(String nombre, String correo, String usuario, String canal, String contraseña, Playlist favoritos) {
+    public Usuarios(String nombre, String correo, String usuario, Canales canal, String contraseña, int edad) {
         this.nombre = nombre;
         this.correo = correo;
         this.usuario = usuario;
         this.canal = canal;
         this.contraseña = contraseña;
-        this.favoritos = favoritos;
+        this.edad = edad;
     }
 
     public Usuarios() {
@@ -43,11 +46,11 @@ public class Usuarios {
         this.usuario = usuario;
     }
 
-    public String getCanal() {
+    public Canales getCanal() {
         return canal;
     }
 
-    public void setCanal(String canal) {
+    public void setCanal(Canales canal) {
         this.canal = canal;
     }
 
@@ -59,20 +62,20 @@ public class Usuarios {
         this.contraseña = contraseña;
     }
 
-    public ArrayList<Canales> getCanales() {
-        return canales;
+    public ArrayList<Canales> getCanalesSub() {
+        return canalesSub;
     }
 
-    public void setCanales(ArrayList<Canales> canales) {
-        this.canales = canales;
+    public void setCanalesSub(ArrayList<Canales> canalesSub) {
+        this.canalesSub = canalesSub;
     }
     
-    public Canales getCanalA(int pos) {
-        return canales.get(pos);
+    public Canales getCanalSub(int pos) {
+        return canalesSub.get(pos);
     }
 
-    public void setCanalA(Canales canal) {
-        this.canales.add(canal);
+    public void setCanalSub(Canales canal) {
+        this.canalesSub.add(canal);
     }
 
     public Playlist getFavoritos() {

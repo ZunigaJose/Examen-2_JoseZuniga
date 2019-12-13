@@ -1,8 +1,9 @@
 package examen.pkg2_josezuniga_31841432;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Canales {
+public class Canales implements Serializable {
     private int subs, cantVideos, likes;
     private String nombre,categoría;
     private ArrayList<Videos> videos = new ArrayList<>();
@@ -10,10 +11,10 @@ public class Canales {
     public Canales() {
     }
 
-    public Canales(int subs, int cantVideos, int likes, String nombre, String categoría) {
-        this.subs = subs;
-        this.cantVideos = cantVideos;
-        this.likes = likes;
+    public Canales(String nombre, String categoría) {
+        this.subs = 0;
+        this.cantVideos = 0;
+        this.likes = 0;
         this.nombre = nombre;
         this.categoría = categoría;
     }
@@ -73,6 +74,9 @@ public class Canales {
     public void setVideo(Videos video) {
         this.videos.add(video);
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

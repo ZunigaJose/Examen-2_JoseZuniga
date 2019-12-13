@@ -1,8 +1,9 @@
 package examen.pkg2_josezuniga_31841432;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Playlist {
+public class Playlist implements Serializable {
     private ArrayList<Videos> videos = new ArrayList<>();
     private int tiempoDura;
 
