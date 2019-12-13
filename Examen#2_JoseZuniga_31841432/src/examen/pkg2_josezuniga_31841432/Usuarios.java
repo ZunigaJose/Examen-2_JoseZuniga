@@ -85,6 +85,9 @@ public class Usuarios implements Serializable {
     public void setFavoritos(Playlist favoritos) {
         this.favoritos = favoritos;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

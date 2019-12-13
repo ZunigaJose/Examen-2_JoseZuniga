@@ -7,6 +7,8 @@ package examen.pkg2_josezuniga_31841432;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -19,6 +21,8 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        usuarios.leerArchivo();
     }
     
     /**
@@ -52,7 +56,12 @@ public class Main extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaCanales = new javax.swing.JList<>();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        arbolito = new javax.swing.JTree();
         jPanel2 = new javax.swing.JPanel();
+        menuListaCanales = new javax.swing.JPopupMenu();
+        subscribir = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         logUser = new javax.swing.JTextField();
@@ -67,7 +76,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel6.setText("Edad");
 
-        creaEdad.setModel(new javax.swing.SpinnerNumberModel(0, null, 0, 1));
+        creaEdad.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         jLabel7.setText("Usuario");
 
@@ -169,7 +178,18 @@ public class Main extends javax.swing.JFrame {
         jLabel11.setText("Canales -Todos-");
 
         listaCanales.setModel(new DefaultListModel());
+        listaCanales.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaCanalesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaCanales);
+
+        jLabel12.setText("Mis Subscripciones");
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Canales");
+        arbolito.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane2.setViewportView(arbolito);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -178,17 +198,25 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addContainerGap(547, Short.MAX_VALUE))
+                    .addComponent(jLabel11)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(110, 110, 110))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(117, Short.MAX_VALUE))
         );
 
@@ -222,6 +250,14 @@ public class Main extends javax.swing.JFrame {
                 .addGap(0, 46, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        subscribir.setText("subscribir");
+        subscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subscribirActionPerformed(evt);
+            }
+        });
+        menuListaCanales.add(subscribir);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -303,7 +339,6 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String nombre, correo, usuario, contraseña;
-        Canales canal;
         int edad;
         try {
             nombre = creaNom.getText();
@@ -329,8 +364,17 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         for (Usuarios user : usuarios.getUsers()) {
+            System.out.println(user);
             if (user.getUsuario().equals(logUser.getText()) && user.getContraseña().equals(logPass.getText())) {
                 usuarioSelected = user;
+                logUser.setText("");
+                logPass.setText("");
+                vistaPrincipal.pack();
+                vistaPrincipal.setLocationRelativeTo(this);
+                vistaPrincipal.setVisible(true);
+                llenarLista();
+                DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Canal");
+                llenarArbol(raiz, usuarioSelected);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -338,6 +382,27 @@ public class Main extends javax.swing.JFrame {
     private void creaPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creaPassActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_creaPassActionPerformed
+
+    private void listaCanalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaCanalesMouseClicked
+        if (listaCanales.getSelectedIndex() >= 0) {
+            if (evt.isMetaDown()) {
+                menuListaCanales.show(listaCanales, evt.getX(), evt.getY());
+            }
+        }
+    }//GEN-LAST:event_listaCanalesMouseClicked
+
+    private void subscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subscribirActionPerformed
+        if (listaCanales.getSelectedIndex() >= 0) {
+            DefaultListModel modelo = (DefaultListModel)listaCanales.getModel();
+            usuarioSelected.setCanalSub((Canales)modelo.get(listaCanales.getSelectedIndex()));
+            usuarios.guardarArchivo();
+            DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Canales");
+            for (Canales canales : usuarioSelected.getCanalesSub()) {
+                llenarArbol(raiz, usuarioSelected);
+            }
+            llenarLista();
+        }
+    }//GEN-LAST:event_subscribirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -376,15 +441,54 @@ public class Main extends javax.swing.JFrame {
     
     private void llenarLista(){
         DefaultListModel modelo = new DefaultListModel();
+        boolean suscrito = false;
         for (Usuarios user : usuarios.getUsers()) {
             if (!user.getCanal().getNombre().equals(usuarioSelected.getCanal().getNombre())) {
-                modelo.addElement(user);
+                for (Canales canales : usuarioSelected.getCanalesSub()) {
+                    if (canales.getNombre().equals(user.getCanal().getNombre())) {
+                        suscrito = true;
+                    }
+                }
+                if (!suscrito) {
+                    modelo.addElement(user.getCanal());
+                }
             }
         }
         listaCanales.setModel(modelo);
     }
+    
+    private void llenarArbol(DefaultMutableTreeNode raiz, Usuarios usuario) {
+        String cat = usuario.getCanal().getCategoría();
+        String nom = usuario.getCanal().getNombre();
+        boolean estaCat = false;
+        for (int i = 0; i < raiz.getChildCount(); i++) {
+            for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                if (raiz.getChildAt(i).toString().equals(cat)) {
+                    estaCat = true;
+                }
+            }
+        }
+        
+        if (estaCat) {
+        for (int i = 0; i < raiz.getChildCount(); i++) {
+            for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                if (raiz.getChildAt(i).toString().equals(cat)) {
+                    ((DefaultMutableTreeNode)raiz.getChildAt(i)).add(new DefaultMutableTreeNode(usuario.getCanal()));
+                }
+            }
+        }
+        } else {
+            DefaultMutableTreeNode categ = new DefaultMutableTreeNode(cat);
+            categ.add(new DefaultMutableTreeNode(usuario.getCanal()));
+            raiz.add(categ);
+            DefaultTreeModel modelo = new DefaultTreeModel(raiz);
+            modelo.reload();
+            arbolito.setModel(modelo);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTree arbolito;
     private javax.swing.JTextField creaCanal;
     private javax.swing.JComboBox<String> creaCat;
     private javax.swing.JTextField creaCorreo;
@@ -399,6 +503,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -410,10 +515,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JList<String> listaCanales;
     private javax.swing.JPasswordField logPass;
     private javax.swing.JTextField logUser;
+    private javax.swing.JPopupMenu menuListaCanales;
+    private javax.swing.JMenuItem subscribir;
     private javax.swing.JDialog vistaPrincipal;
     // End of variables declaration//GEN-END:variables
     private Usuarios usuarioSelected = null;
