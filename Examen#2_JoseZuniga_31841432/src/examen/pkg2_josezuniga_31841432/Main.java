@@ -26,6 +26,11 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         usuarios.leerArchivo();
+        for (Usuarios user : usuarios.getUsers()) {
+            for (Videos video1 : user.getCanal().getVideos()) {
+                System.out.println(video1);
+            }
+        }
     }
     
     /**
@@ -85,6 +90,7 @@ public class Main extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         areaVerVideo = new javax.swing.JTextArea();
+        nombreVideo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         logUser = new javax.swing.JTextField();
@@ -405,24 +411,30 @@ public class Main extends javax.swing.JFrame {
         areaVerVideo.setRows(5);
         jScrollPane4.setViewportView(areaVerVideo);
 
+        nombreVideo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout verVideoLayout = new javax.swing.GroupLayout(verVideo.getContentPane());
         verVideo.getContentPane().setLayout(verVideoLayout);
         verVideoLayout.setHorizontalGroup(
             verVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(verVideoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(verVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
-                    .addComponent(videoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(verVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(verVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton5)
+                        .addComponent(videoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombreVideo))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         verVideoLayout.setVerticalGroup(
             verVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, verVideoLayout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(38, 38, 38)
+                .addComponent(nombreVideo)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(videoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
@@ -597,6 +609,7 @@ public class Main extends javax.swing.JFrame {
         video.setTiempo(Integer.parseInt(videoTiempo.getValue().toString()));
         usuarioSelected.getCanal().setVideo(video);
         videosDiag.setVisible(false);
+        usuarios.guardarArchivo();
     }//GEN-LAST:event_subirVideoActionPerformed
 
     private void arbolitoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_arbolitoMouseClicked
@@ -617,6 +630,7 @@ public class Main extends javax.swing.JFrame {
         verVideo.setLocationRelativeTo(vistaPrincipal);
         verVideo.setModal(true);
         verVideo.setVisible(true);
+        nombreVideo.setText(video.getNombre());
     }//GEN-LAST:event_VerActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -715,14 +729,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    /*private void buscarArbol() {
-    for (Arbolito arbol : arboles.getArboles()) {
-    if (usuarioSelected.getUsuario().equals(arbol.getUser().getUsuario())) {
-    arbolito.setModel(arbol.getModel());
-    }
-    }
-    }*/
-    
+
     private void subtitulos() {
         int numero = (int)videoTiempo.getValue() / 10;
         int x = numero - video.getSubtitulos().size();
@@ -780,6 +787,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField logUser;
     private javax.swing.JPopupMenu menuListaCanales;
     private javax.swing.JPopupMenu menuarbol;
+    private javax.swing.JLabel nombreVideo;
     private javax.swing.JButton subirVideo;
     private javax.swing.JMenuItem subscribir;
     private javax.swing.JButton subtit;
