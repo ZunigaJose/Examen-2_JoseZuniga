@@ -26,11 +26,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         usuarios.leerArchivo();
-        for (Usuarios user : usuarios.getUsers()) {
-            for (Videos video1 : user.getCanal().getVideos()) {
-                System.out.println(video1);
-            }
-        }
+        
     }
     
     /**
@@ -98,6 +94,7 @@ public class Main extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         logPass = new javax.swing.JPasswordField();
+        jLabel17 = new javax.swing.JLabel();
 
         jLabel4.setText("Nombre");
 
@@ -412,6 +409,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane4.setViewportView(areaVerVideo);
 
         nombreVideo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        nombreVideo.setText("l");
 
         javax.swing.GroupLayout verVideoLayout = new javax.swing.GroupLayout(verVideo.getContentPane());
         verVideo.getContentPane().setLayout(verVideoLayout);
@@ -434,7 +432,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(nombreVideo)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(videoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
@@ -464,6 +462,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel17.setText("You Leo Tube");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -489,11 +491,17 @@ public class Main extends javax.swing.JFrame {
                         .addGap(139, 139, 139)
                         .addComponent(jButton2)))
                 .addContainerGap(130, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -507,7 +515,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(45, 45, 45)
                 .addComponent(jButton2)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         pack();
@@ -617,11 +625,12 @@ public class Main extends javax.swing.JFrame {
             int row = arbolito.getClosestRowForLocation(evt.getX(), evt.getY());
             arbolito.setSelectionRow(row);
             Object v1 = arbolito.getSelectionPath().getLastPathComponent();
-            nodoSeleccionado = (DefaultMutableTreeNode)v1;
+            nodoSeleccionado = (DefaultMutableTreeNode) v1;
             if (nodoSeleccionado.getUserObject() instanceof Videos) {
-                video = ((Videos)nodoSeleccionado.getUserObject());
+                video = ((Videos) nodoSeleccionado.getUserObject());
             }
             menuarbol.show(arbolito, evt.getX(), evt.getY());
+            nombreVideo.setText(video.getNombre());
         }
     }//GEN-LAST:event_arbolitoMouseClicked
 
@@ -630,7 +639,6 @@ public class Main extends javax.swing.JFrame {
         verVideo.setLocationRelativeTo(vistaPrincipal);
         verVideo.setModal(true);
         verVideo.setVisible(true);
-        nombreVideo.setText(video.getNombre());
     }//GEN-LAST:event_VerActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -766,6 +774,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
