@@ -6,6 +6,7 @@
 package examen.pkg2_josezuniga_31841432;
 
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -83,7 +84,7 @@ public class Main extends javax.swing.JFrame {
         videoBarra = new javax.swing.JProgressBar();
         jButton5 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        areaVerVideo = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         logUser = new javax.swing.JTextField();
@@ -400,9 +401,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane4.setViewportView(jTextArea1);
+        areaVerVideo.setColumns(20);
+        areaVerVideo.setRows(5);
+        jScrollPane4.setViewportView(areaVerVideo);
 
         javax.swing.GroupLayout verVideoLayout = new javax.swing.GroupLayout(verVideo.getContentPane());
         verVideo.getContentPane().setLayout(verVideoLayout);
@@ -612,11 +613,16 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_arbolitoMouseClicked
 
     private void VerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerActionPerformed
-        
+        verVideo.pack();
+        verVideo.setLocationRelativeTo(vistaPrincipal);
+        verVideo.setModal(true);
+        verVideo.setVisible(true);
     }//GEN-LAST:event_VerActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+        hilo = new HiloVideo(video, videoBarra, new Date(), areaVerVideo);
+        proceso1 = new Thread(hilo);
+        proceso1.start();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -731,6 +737,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Ver;
     private javax.swing.JTree arbolito;
+    private javax.swing.JTextArea areaVerVideo;
     private javax.swing.JTextField creaCanal;
     private javax.swing.JComboBox<String> creaCat;
     private javax.swing.JTextField creaCorreo;
@@ -768,7 +775,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JList<String> listaCanales;
     private javax.swing.JPasswordField logPass;
     private javax.swing.JTextField logUser;
@@ -789,4 +795,6 @@ public class Main extends javax.swing.JFrame {
     private adminUsuarios usuarios = new adminUsuarios("./Usuarios.LTube");
     private Videos video = new Videos();
     private DefaultMutableTreeNode nodoSeleccionado;
+    HiloVideo hilo = new HiloVideo(video, videoBarra, new Date(), areaVerVideo);
+    Thread proceso1;
 }
