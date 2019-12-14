@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         usuarios.leerArchivo();
+        arboles.leerArchivo();
     }
     
     /**
@@ -60,8 +62,21 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         arbolito = new javax.swing.JTree();
         jPanel2 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
         menuListaCanales = new javax.swing.JPopupMenu();
         subscribir = new javax.swing.JMenuItem();
+        videosDiag = new javax.swing.JDialog();
+        jLabel13 = new javax.swing.JLabel();
+        videoNombre = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        videoTiempo = new javax.swing.JSpinner();
+        jLabel15 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        videoArea = new javax.swing.JTextArea();
+        jLabel16 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         logUser = new javax.swing.JTextField();
@@ -222,18 +237,31 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Canales", jPanel1);
 
+        jButton4.setText("Subir Video");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 763, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addComponent(jButton4)
+                .addContainerGap(571, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(jButton4)
+                .addContainerGap(322, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jTabbedPane1.addTab("Mi Canal", jPanel2);
 
         javax.swing.GroupLayout vistaPrincipalLayout = new javax.swing.GroupLayout(vistaPrincipal.getContentPane());
         vistaPrincipal.getContentPane().setLayout(vistaPrincipalLayout);
@@ -258,6 +286,87 @@ public class Main extends javax.swing.JFrame {
             }
         });
         menuListaCanales.add(subscribir);
+
+        jLabel13.setText("Nombre");
+
+        jLabel14.setText("Tiempo de reproduccion");
+
+        videoTiempo.setModel(new javax.swing.SpinnerNumberModel(10, 10, null, 1));
+
+        jLabel15.setText("Segundos");
+
+        jButton5.setText("Subir Video");
+        jButton5.setEnabled(false);
+
+        videoArea.setColumns(20);
+        videoArea.setLineWrap(true);
+        videoArea.setRows(5);
+        jScrollPane3.setViewportView(videoArea);
+
+        jLabel16.setText("Subtitulo");
+
+        jButton6.setText("Añadir");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout videosDiagLayout = new javax.swing.GroupLayout(videosDiag.getContentPane());
+        videosDiag.getContentPane().setLayout(videosDiagLayout);
+        videosDiagLayout.setHorizontalGroup(
+            videosDiagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, videosDiagLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addGap(21, 21, 21))
+            .addGroup(videosDiagLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(videosDiagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jLabel16)
+                    .addGroup(videosDiagLayout.createSequentialGroup()
+                        .addGroup(videosDiagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(videosDiagLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(27, 27, 27)
+                                .addComponent(videoTiempo))
+                            .addGroup(videosDiagLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(videoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel15)))
+                .addGap(18, 18, 18)
+                .addComponent(jButton6)
+                .addContainerGap(179, Short.MAX_VALUE))
+        );
+        videosDiagLayout.setVerticalGroup(
+            videosDiagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(videosDiagLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(videosDiagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(videoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(videosDiagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(videoTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addGap(31, 31, 31)
+                .addComponent(jLabel16)
+                .addGroup(videosDiagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(videosDiagLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, videosDiagLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addComponent(jButton6)
+                        .addGap(147, 147, 147)))
+                .addComponent(jButton5)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -373,8 +482,7 @@ public class Main extends javax.swing.JFrame {
                 vistaPrincipal.setLocationRelativeTo(this);
                 vistaPrincipal.setVisible(true);
                 llenarLista();
-                DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Canal");
-                llenarArbol(raiz, usuarioSelected);
+                buscarArbol();
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -394,15 +502,26 @@ public class Main extends javax.swing.JFrame {
     private void subscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subscribirActionPerformed
         if (listaCanales.getSelectedIndex() >= 0) {
             DefaultListModel modelo = (DefaultListModel)listaCanales.getModel();
+            Canales canal = (Canales)modelo.get(listaCanales.getSelectedIndex());
             usuarioSelected.setCanalSub((Canales)modelo.get(listaCanales.getSelectedIndex()));
             usuarios.guardarArchivo();
             DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Canales");
-            for (Canales canales : usuarioSelected.getCanalesSub()) {
-                llenarArbol(raiz, usuarioSelected);
-            }
+            Arbolito arbol = new Arbolito((DefaultTreeModel)arbolito.getModel(), usuarioSelected);
+            llenarArbol(raiz, canal);
+            arboles.setArbol(arbol);
+            arboles.guardarArchivo();
             llenarLista();
         }
     }//GEN-LAST:event_subscribirActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        video = new Videos();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        video.setSubtitulo(videoArea.getText());
+        videoArea.setText("");
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,10 +575,10 @@ public class Main extends javax.swing.JFrame {
         }
         listaCanales.setModel(modelo);
     }
-    
-    private void llenarArbol(DefaultMutableTreeNode raiz, Usuarios usuario) {
-        String cat = usuario.getCanal().getCategoría();
-        String nom = usuario.getCanal().getNombre();
+
+    private void llenarArbol(DefaultMutableTreeNode raiz, Canales canal) {
+        String cat = canal.getCategoría();
+        String nom = canal.getNombre();
         boolean estaCat = false;
         for (int i = 0; i < raiz.getChildCount(); i++) {
             for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
@@ -468,23 +587,43 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         if (estaCat) {
-        for (int i = 0; i < raiz.getChildCount(); i++) {
-            for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
-                if (raiz.getChildAt(i).toString().equals(cat)) {
-                    ((DefaultMutableTreeNode)raiz.getChildAt(i)).add(new DefaultMutableTreeNode(usuario.getCanal()));
+            for (int i = 0; i < raiz.getChildCount(); i++) {
+                for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                    if (raiz.getChildAt(i).toString().equals(cat)) {
+                        ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(new DefaultMutableTreeNode(canal.getNombre()));
+                        for (Videos video : canal.getVideos()) {
+                            ((DefaultMutableTreeNode)raiz.getChildAt(i).getChildAt(j)).add(new DefaultMutableTreeNode(video));
+                        }
+                    }
                 }
             }
-        }
         } else {
             DefaultMutableTreeNode categ = new DefaultMutableTreeNode(cat);
-            categ.add(new DefaultMutableTreeNode(usuario.getCanal()));
+            DefaultMutableTreeNode nombreCanal = new DefaultMutableTreeNode(canal.getNombre());
+            for (Videos video : canal.getVideos()) {
+                nombreCanal.add(new DefaultMutableTreeNode(video));
+            }
+            categ.add(nombreCanal);
             raiz.add(categ);
             DefaultTreeModel modelo = new DefaultTreeModel(raiz);
             modelo.reload();
             arbolito.setModel(modelo);
         }
+    }
+    
+    private void buscarArbol() {
+        for (Arbolito arbol : arboles.getArboles()) {
+            if (usuarioSelected.getUsuario().equals(arbol.getUser().getUsuario())) {
+                arbolito.setModel((TreeModel) arbol);
+            }
+        }
+    }
+    
+    private void subtitulos() {
+        int numero = (int)videoTiempo.getValue() / 10;
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -500,10 +639,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -516,14 +662,22 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JList<String> listaCanales;
     private javax.swing.JPasswordField logPass;
     private javax.swing.JTextField logUser;
     private javax.swing.JPopupMenu menuListaCanales;
     private javax.swing.JMenuItem subscribir;
+    private javax.swing.JTextArea videoArea;
+    private javax.swing.JTextField videoNombre;
+    private javax.swing.JSpinner videoTiempo;
+    private javax.swing.JDialog videosDiag;
     private javax.swing.JDialog vistaPrincipal;
     // End of variables declaration//GEN-END:variables
     private Usuarios usuarioSelected = null;
     private adminUsuarios usuarios = new adminUsuarios("./Usuarios.LTube");
+    private adminArboles arboles = new adminArboles("./Arboles.LTube");
+    private Videos video = new Videos();
 }
