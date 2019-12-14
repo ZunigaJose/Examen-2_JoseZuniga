@@ -77,6 +77,13 @@ public class Main extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         subtit = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        menuarbol = new javax.swing.JPopupMenu();
+        Ver = new javax.swing.JMenuItem();
+        verVideo = new javax.swing.JDialog();
+        videoBarra = new javax.swing.JProgressBar();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         logUser = new javax.swing.JTextField();
@@ -204,6 +211,11 @@ public class Main extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Canales");
         arbolito.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        arbolito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                arbolitoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(arbolito);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -373,6 +385,49 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        Ver.setText("Ver video");
+        Ver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerActionPerformed(evt);
+            }
+        });
+        menuarbol.add(Ver);
+
+        jButton5.setText("Play");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane4.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout verVideoLayout = new javax.swing.GroupLayout(verVideo.getContentPane());
+        verVideo.getContentPane().setLayout(verVideoLayout);
+        verVideoLayout.setHorizontalGroup(
+            verVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(verVideoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(verVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5)
+                    .addComponent(videoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        verVideoLayout.setVerticalGroup(
+            verVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, verVideoLayout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(videoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5)
+                .addGap(23, 23, 23))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -540,7 +595,29 @@ public class Main extends javax.swing.JFrame {
         video.setNombre(videoNombre.getText());
         video.setTiempo(Integer.parseInt(videoTiempo.getValue().toString()));
         usuarioSelected.getCanal().setVideo(video);
+        videosDiag.setVisible(false);
     }//GEN-LAST:event_subirVideoActionPerformed
+
+    private void arbolitoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_arbolitoMouseClicked
+        if (evt.isMetaDown()) {
+            int row = arbolito.getClosestRowForLocation(evt.getX(), evt.getY());
+            arbolito.setSelectionRow(row);
+            Object v1 = arbolito.getSelectionPath().getLastPathComponent();
+            nodoSeleccionado = (DefaultMutableTreeNode)v1;
+            if (nodoSeleccionado.getUserObject() instanceof Videos) {
+                video = ((Videos)nodoSeleccionado.getUserObject());
+            }
+            menuarbol.show(arbolito, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_arbolitoMouseClicked
+
+    private void VerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerActionPerformed
+        
+    }//GEN-LAST:event_VerActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -652,6 +729,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Ver;
     private javax.swing.JTree arbolito;
     private javax.swing.JTextField creaCanal;
     private javax.swing.JComboBox<String> creaCat;
@@ -665,6 +743,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -686,16 +765,21 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JList<String> listaCanales;
     private javax.swing.JPasswordField logPass;
     private javax.swing.JTextField logUser;
     private javax.swing.JPopupMenu menuListaCanales;
+    private javax.swing.JPopupMenu menuarbol;
     private javax.swing.JButton subirVideo;
     private javax.swing.JMenuItem subscribir;
     private javax.swing.JButton subtit;
+    private javax.swing.JDialog verVideo;
     private javax.swing.JTextArea videoArea;
+    private javax.swing.JProgressBar videoBarra;
     private javax.swing.JTextField videoNombre;
     private javax.swing.JSpinner videoTiempo;
     private javax.swing.JDialog videosDiag;
@@ -704,4 +788,5 @@ public class Main extends javax.swing.JFrame {
     private Usuarios usuarioSelected = null;
     private adminUsuarios usuarios = new adminUsuarios("./Usuarios.LTube");
     private Videos video = new Videos();
+    private DefaultMutableTreeNode nodoSeleccionado;
 }
